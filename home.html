@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <?!= include('Stylesheet'); ?>
+    <?!= include('Styleproveedores'); ?>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <title>Inicio - Manejo de Inventario</title>
+</head>
+<body>
+    <div class="container">
+        <div class="top-container">
+            <div class="top-container__column left">
+                <h1 class="title">Yogoyass</h1>
+            </div>
+            <div class="top-container__column right">
+                <div class="quick-menu">
+                    <i id="addSale" class="fas fa-shopping-cart quick-menu__item" title="Agregar Venta"></i>
+                    <i id="todaySales" class="fas fa-chart-line quick-menu__item" title="Ventas del Día"></i>
+                    <i id="stock" class="fas fa-warehouse quick-menu__item" title="Stock"></i>
+                </div>
+                <div class="user-info">
+                    <span id="currentDate"></span>
+                    <span id="loggedUser"></span>
+                </div>
+            </div>
+        </div>
+        <div class="main-container">
+            <div class="sidebar">
+                <div class="sidebar__item" onclick="toggleSubMenu(this)">Contactos</div>
+                <div class="sidebar__submenu" style="display: none;"> <!-- Asegúrate de que esté oculto por defecto -->
+                    <div id="proveedores-link" class="sidebar__submenu-item">Proveedores</div>
+                    <div class="sidebar__submenu-item">Clientes</div>
+                </div>
+
+                <div class="sidebar__item" onclick="toggleSubMenu(this)">Productos</div>
+                <div class="sidebar__submenu" style="display: none;">
+                    <div class="sidebar__submenu-item">Agregar producto</div>
+                    <div class="sidebar__submenu-item">Stock inicial</div>
+                    <div class="sidebar__submenu-item">Categorías</div>
+                    <div class="sidebar__submenu-item">Marcas</div>
+                </div>
+
+                <div class="sidebar__item" onclick="toggleSubMenu(this)">Compras</div>
+                <div class="sidebar__submenu" style="display: none;">
+                    <div class="sidebar__submenu-item">Agregar compra</div>
+                </div>
+
+                <div class="sidebar__item" onclick="toggleSubMenu(this)">Ventas</div>
+                <div class="sidebar__submenu" style="display: none;">
+                    <div class="sidebar__submenu-item">Agregar venta</div>
+                    <div class="sidebar__submenu-item">Agregar Borrador</div>
+                    <div class="sidebar__submenu-item">Lista de borradores</div>
+                </div>
+
+                <div class="sidebar__item" onclick="toggleSubMenu(this)">Gastos</div>
+                <div class="sidebar__submenu" style="display: none;">
+                    <div class="sidebar__submenu-item">Lista de gastos</div>
+                    <div class="sidebar__submenu-item">Agregar Gasto</div>
+                    <div class="sidebar__submenu-item">Categoría de gastos</div>
+                </div>
+
+                <div class="sidebar__item" onclick="toggleSubMenu(this)">Informes</div>
+                <div class="sidebar__submenu" style="display: none;">
+                    <div class="sidebar__submenu-item">Informe de stock</div>
+                    <div class="sidebar__submenu-item">Productos en tendencia</div>
+                    <div class="sidebar__submenu-item">Informe de compra del producto</div>
+                    <div class="sidebar__submenu-item">Informe de venta del producto</div>
+                    <div class="sidebar__submenu-item">Informe de pago de ventas</div>
+                    <div class="sidebar__submenu-item">Informe de gastos</div>
+                </div>
+            </div>
+            <div class="work-area">
+                <!-- Área de trabajo según la opción seleccionada -->
+            </div>
+        </div>
+    </div>
+
+<?!= include('homeJS'); ?>
+<?!= include('panelJS'); ?>
+<?!= include('guardarProveedorJS'); ?>
+
+
+<script>
+  // Cargar dinámicamente la página de proveedores
+    document.addEventListener('DOMContentLoaded', function() { // Cargar dinámicamente la página de proveedores
+        const proveedoresLink = document.querySelector('#proveedores-link'); // Link para cargar proveedores
+
+        proveedoresLink.addEventListener('click', function() {
+            // Llamar a la función en el servidor para obtener el HTML de proveedores
+            google.script.run.withSuccessHandler(function(data) {
+                const workArea = document.querySelector('.work-area');
+                workArea.innerHTML = data; // Inserta el contenido de proveedores en el área de trabajo
+
+                // Aquí es donde se vuelve a añadir el evento al searchBar
+                const searchBar = document.getElementById('searchBar');
+                if (searchBar) {
+                    searchBar.addEventListener('input', manejarBusqueda);
+                } else {
+                  console.error("No se encontró el elemento 'searchBar'");
+                }
+                
+                // Manejo del evento de clic en el botón de tres puntos
+document.querySelector('.work-area').addEventListener('click', function(event) {
+    if (event.target.matches('.dropdown-btn')) {
+        const dropdownContent = event.target.nextElementSibling; // Selecciona el menú desplegable
+        const isVisible = dropdownContent.style.display === 'block';
+
+        // Ocultar todos los menús desplegables
+        document.querySelectorAll('.dropdown-content').forEach(menu => {
+            menu.style.display = 'none';
+        });
+
+        // Mostrar o ocultar el menú desplegable correspondiente
+        dropdownContent.style.display = isVisible ? 'none' : 'block';
+
+        // Agregar un console.log para verificar que se clicó
+        console.log('Botón de menú clicado'); // Esto debería mostrarse en la consola
+    } else {
+        // Si se hace clic fuera del botón, ocultar todos los menús
+        document.querySelectorAll('.dropdown-content').forEach(menu => {
+            menu.style.display = 'none';
+        });
+    }
+});
+
+
+                // Inicializar eventos del panel deslizante después de cargar el contenido
+            initModalEvents();  
+            }).getProveedoresPage(); // Llamada a la función en código.gs
+        });
+    });
+</script>
+<?!= include('buscarProveedorJS'); ?>
+
+
+
+</body>
+</html>

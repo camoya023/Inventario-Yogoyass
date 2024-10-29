@@ -1,0 +1,38 @@
+<script>
+function initModalEvents() {
+    const addProviderButton = document.getElementById('addProviderButton');
+    const slidePanel = document.getElementById('slidePanel');
+    const closePanel = document.getElementById('closePanel');
+    const cancelBtn = document.getElementById('cancelBtn');
+    const toggleMoreInfoButton = document.getElementById('toggleMoreInfo');
+    const additionalInfoSection = document.getElementById('additional-info');
+    const providerForm = document.getElementById('providerForm');
+
+    if (addProviderButton && slidePanel && closePanel && cancelBtn && toggleMoreInfoButton && additionalInfoSection && providerForm) {
+        // Mostrar el panel deslizante al hacer clic en el botón "Añadir"
+        addProviderButton.addEventListener('click', function() {
+            slidePanel.style.display = 'flex';  // Mostrar el panel como flex para centrarlo
+        });
+    
+        // Ocultar el panel deslizante al hacer clic en la "X" o el botón "Cancelar"
+        [closePanel, cancelBtn].forEach(button => {
+            button.addEventListener('click', function() {
+                slidePanel.style.display = 'none';
+            });
+        });
+    
+        // Alternar la visibilidad de la sección de información adicional
+        toggleMoreInfoButton.addEventListener('click', function() {
+            additionalInfoSection.classList.toggle('hidden');
+            toggleMoreInfoButton.textContent = additionalInfoSection.classList.contains('hidden') ? 'Más información' : 'Menos información';
+        });
+    
+        // Ocultar el panel deslizante si se hace clic fuera de él
+        window.addEventListener('click', function(event) {
+            if (event.target === slidePanel) {
+                slidePanel.style.display = 'none';
+            }
+        });
+    }
+}
+</script>

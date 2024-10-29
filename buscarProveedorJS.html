@@ -1,0 +1,87 @@
+<script>
+// buscarProveedores.js
+
+// Función para manejar la búsqueda
+function manejarBusqueda() {
+  const query = document.getElementById('searchBar').value.trim();
+
+  if (query.length >= 3) {
+    // Llama a la función en el servidor para buscar proveedores
+    google.script.run.withSuccessHandler(mostrarResultados).buscarProveedores(query);
+  } else {
+    // Si la barra está vacía o tiene menos de 3 caracteres, limpia el área de trabajo
+    document.getElementById('resultadosBusqueda').innerHTML = '';
+  }
+}
+
+// Función para mostrar resultados en el área de trabajo
+function mostrarResultados(resultados) {
+    const workArea = document.querySelector('.work-area');
+    const table = document.getElementById('resultTable');
+    const tbody = table.querySelector('tbody');
+
+    tbody.innerHTML = ''; // Limpia el cuerpo de la tabla
+
+    if (resultados.length > 0) {
+        table.style.display = 'table'; // Asegúrate de que la tabla esté visible
+        resultados.forEach(function(proveedor) {
+            const row = document.createElement('tr'); // Nueva fila
+            
+            // Columna de menú desplegable
+            const menuCell = document.createElement('td');
+            menuCell.classList.add('menu-cell');
+            menuCell.innerHTML = `
+                <div class="dropdown">
+                    <button class="dropdown-btn">⋮</button>
+                    <div class="dropdown-content">
+                        <a href="#" onclick="verProveedor('${proveedor.id}')">Ver</a>
+                        <a href="#" onclick="editarProveedor('${proveedor.id}')">Editar</a>
+                        <a href="#" onclick="eliminarProveedor('${proveedor.id}')">Eliminar</a>
+                        <a href="#" onclick="desactivarProveedor('${proveedor.id}')">Desactivar</a>
+                    </div>
+                </div>
+            `;
+            row.appendChild(menuCell);
+
+            // Crear las celdas con los datos
+            row.innerHTML += `<td>${proveedor.id || ''}</td>
+                              <td>${proveedor.empresa || ''}</td>
+                              <td>${proveedor.contacto || ''}</td>
+                              <td>${proveedor.movil || ''}</td>`;
+            tbody.appendChild(row); // Agrega la fila al cuerpo de la tabla
+        });
+    } else {
+        table.style.display = 'none'; // Oculta la tabla si no hay resultados
+        const mensaje = document.createElement('p');
+        mensaje.classList.add('no-results');
+        mensaje.textContent = 'No se encontraron proveedores.';
+        workArea.appendChild(mensaje);
+    }
+}
+
+// Funciónes para el manejo de las
+function verProveedor(id) {
+    alert("Ver proveedor: " + id);
+    // Agrega la lógica para ver el proveedor
+}
+
+function editarProveedor(id) {
+    alert("Editar proveedor: " + id);
+    // Agrega la lógica para editar el proveedor
+}
+
+function eliminarProveedor(id) {
+    alert("Eliminar proveedor: " + id);
+    // Agrega la lógica para eliminar el proveedor
+}
+
+function desactivarProveedor(id) {
+    alert("Desactivar proveedor: " + id);
+    // Agrega la lógica para desactivar el proveedor
+}
+
+
+
+
+
+</script>

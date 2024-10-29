@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Búsqueda de Proveedores</title>
+    <script>
+        function buscarProveedores() {
+            const query = document.getElementById('searchInput').value.trim(); // Eliminar espacios en blanco
+            const container = document.getElementById('resultContainer');
+
+            if (query.length === 0) {
+                container.innerHTML = ''; // Limpiar resultados si la barra está vacía
+                return; // No realizar búsqueda si no hay texto
+            }
+
+            google.script.run.withSuccessHandler(mostrarResultados).buscarProveedores(query);
+        }
+
+        function mostrarResultados(resultados) {
+            const container = document.getElementById('resultContainer');
+            container.innerHTML = ''; // Limpiar resultados anteriores
+
+            if (resultados.length === 0) {
+                container.innerHTML = '<p>No se encontraron proveedores.</p>';
+                return;
+            }
+
+            // Mostrar resultados
+            resultados.forEach(proveedor => {
+                const div = document.createElement('div');
+                div.innerHTML = `<strong>ID:</strong> ${proveedor.id}, <strong>Nombre:</strong> ${proveedor.nombre}, <strong>Número de móvil:</strong> ${proveedor.movil}`;
+                container.appendChild(div);
+            });
+        }
+    </script>
+</head>
+<body>
+    <input type="text" id="searchInput" placeholder="Buscar proveedor..." onkeyup="buscarProveedores()">
+    <div id="resultContainer"></div>
+</body>
+</html>

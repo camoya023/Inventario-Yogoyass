@@ -1,0 +1,246 @@
+<style>
+.container {
+  padding: 20px;
+}
+
+.sub-title {
+  font-size: 20px;
+  margin-bottom: 20px;
+}
+
+.search-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.search-input {
+  width: 80%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+  outline: none;
+  transition: border-color 0.3s;
+}
+
+.search-input:focus {
+  border-color: #1367D1;
+}
+
+.add-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #1367D1;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 15px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s;
+}
+
+.add-button:hover {
+  background-color: #0f5f99;
+}
+
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  width: 400px;
+  max-width: 90%;
+  position: relative;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra para el panel */
+}
+
+.close-button {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 14px;
+}
+
+.btn-more-info {
+  background-color: #e7e7e7;
+  color: #333;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 15px;
+  cursor: pointer;
+  font-size: 16px;
+  display: block;
+  margin: 15px 0;
+}
+
+.btn-more-info:hover {
+  background-color: #d0d0d0;
+}
+
+.modal-footer {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.btn-save {
+  background-color: #1367D1;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.btn-save:hover {
+  background-color: #0f5f99;
+}
+
+.btn-close {
+  background-color: #e7e7e7;
+  color: black;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.btn-close:hover {
+  background-color: #d5d5d5;
+}
+
+.hidden {
+  display: none;
+}
+
+.required {
+  color: red;
+}
+
+.error-message {
+    color: red; /* Color del mensaje */
+    font-size: 12px; /* Tamaño de la fuente */
+    margin-top: 4px; /* Espacio entre el campo y el mensaje */
+}
+
+/* Estilos generales para la tabla */
+#resultTable {
+    width: 100%; /* Ancho completo */
+    border-collapse: collapse; /* Colapsar bordes */
+    margin-top: 10px; /* Margen superior */
+    display: table; /* Asegúrate de que la tabla esté visible */
+}
+
+/* Estilos para el encabezado de la tabla */
+#resultTable thead {
+    background-color: #4CAF50; /* Color de fondo del encabezado */
+    color: white; /* Color del texto */
+}
+
+/* Estilos para las celdas del encabezado */
+#resultTable th {
+    padding: 10px; /* Espaciado interno */
+    text-align: left; /* Alinear texto a la izquierda */
+}
+
+/* Estilos para las filas de la tabla */
+#resultTable tbody tr {
+    background-color: #f9f9f9; /* Color de fondo de las filas */
+    transition: background-color 0.3s; /* Transición suave para el color de fondo */
+}
+
+/* Estilos para las celdas de las filas */
+#resultTable td {
+    padding: 10px; /* Espaciado interno */
+    border: 1px solid #ddd; /* Borde de las celdas */
+}
+
+/* Efecto al pasar el mouse sobre las filas */
+#resultTable tbody tr:hover {
+    background-color: #e1f5fe; /* Color de fondo al pasar el mouse */
+}
+
+/* Estilos para el mensaje de "no se encontraron resultados" */
+#resultTable .no-results {
+    text-align: center; /* Centrar el mensaje */
+    padding: 20px; /* Espaciado interno */
+    color: #999; /* Color gris para el mensaje */
+}
+
+/* Estilos para el menú desplegable */
+
+/* Estilo del botón de menú */
+.dropdown-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 20px; /* Tamaño del ícono de los 3 puntos */
+    padding: 5px;
+    transition: color 0.3s;
+}
+
+/* Estilo del menú desplegable */
+.dropdown {
+    position: relative; /* Necesario para el posicionamiento absoluto del menú */
+}
+
+.dropdown-content {
+    display: none; /* Ocultar el menú por defecto */
+    position: absolute; /* Posicionar el menú en relación al botón */
+    background-color: white; /* Color de fondo del menú */
+    min-width: 80px; /* Ancho mínimo del menú */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2); /* Sombra */
+    z-index: 1; /* Asegurar que el menú esté por encima de otros elementos */
+    border-radius: 4px; /* Bordes redondeados */
+}
+
+/* Estilo de los enlaces en el menú */
+.dropdown-content a {
+    color: black; /* Color del texto */
+    padding: 4px 12px; /* Espaciado interno */
+    text-decoration: none; /* Sin subrayado */
+    display: block; /* Mostrar como bloque */
+    transition: background-color 0.3s; /* Transición suave para el hover */
+}
+
+/* Efecto hover para los enlaces */
+.dropdown-content a:hover {
+    background-color: #f1f1f1; /* Color de fondo al pasar el ratón */
+}
+
+/* Estilo para la celda del menú */
+.menu-cell {
+    width: 40px; /* Ancho de la celda del menú */
+    text-align: center; /* Centrar el contenido */
+}
+
+
+</style>

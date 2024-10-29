@@ -1,0 +1,150 @@
+<style>
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.top-container {
+  display: flex;
+  background-color: #1572E8;
+  padding: 20px;
+  color: white;
+}
+
+.top-container__column {
+  flex: 1;
+}
+
+.top-container__column.right {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.title {
+  font-size: 24px;
+  margin: 0;
+}
+
+.user-info {
+  display: flex;
+  align-items: center; /* Alineación horizontal */
+  gap: 10px; /* Espacio entre fecha y usuario */
+  cursor: pointer; /* Esta línea agrega el cursor en forma de mano */
+}
+
+.quick-menu {
+  display: flex;
+  gap: 30px;
+  align-items: center; /* Alineación vertical de los iconos */
+}
+
+.quick-menu__item {
+  display: inline-block;
+  font-family: Ionicons; /* Mantén la fuente si la necesitas */
+  font-style: normal;
+  font-size: 24px; /* Tamaño del ícono */
+  font-weight: 400;
+  font-variant: normal;
+  text-transform: none;
+  text-rendering: auto;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  position: relative; /* Para posicionar el tooltip */
+  color: white; /* Color por defecto del icono */
+  /*transition: color 0.3s ease; /* Transición suave para el color */
+  cursor: pointer; /* Esta línea agrega el cursor en forma de mano */
+}
+
+.quick-menu__item:hover::after {
+  /*content: attr(title); */
+  position: absolute;
+  bottom: -25px; /* Ajusta la posición del tooltip */
+  left: 50%;
+  /*transform: translateX(-50%); */
+  /*color: black; /* Color del texto */
+  padding: 5px;
+  border-radius: 3px;
+  white-space: nowrap;
+  /*font-size: 12px; /* Tamaño de letra moderada */
+  display: block; /* Asegura que el tooltip se muestre */
+  z-index: 1; /* Asegura que el tooltip esté por encima */
+}
+
+.main-container {
+  display: flex;
+  flex: 1;
+}
+
+.sidebar {
+  width: 200px;
+  background-color: #FFFFFF;
+  padding: 15px;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.sidebar__submenu {
+    display: none; /* Asegúrate de que el submenú esté oculto por defecto */
+    flex-direction: column; /* Asegura que los elementos se alineen verticalmente */
+    padding-left: 15px; /* Añade un poco de espacio desde el borde */
+}
+
+/* Esta clase se aplicará cuando el submenú esté visible */
+.sidebar__submenu.active {
+  display: flex; /* Muestra el submenú como un contenedor flex */
+}
+
+.sidebar__item.active {
+  font-weight: bold; /* Deja la opción en negrita */
+  background-color: #E0E0E0; /* Opcional: un color de fondo para resaltar la opción activa */
+}
+
+
+.sidebar__item {
+  font-size: 16px;
+  padding: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.sidebar__item:hover {
+  background-color: #28B97B; /* Color de fondo para el hover */
+  color: white;
+}
+
+/*.sidebar__submenu {
+  display: none;
+  padding-left: 15px;
+}*/
+
+.sidebar__submenu-item {
+  font-size: 14px;
+  padding: 8px 0;
+  cursor: pointer;
+}
+
+.sidebar__submenu-item:hover {
+  color: #28B97B; /* Color del texto al hacer hover en los submenús */
+}
+
+.work-area {
+  flex: 1;
+  background-color: #F8F9FE;
+  /*padding: 20px;*/
+}
+
+.show {
+    display: block;
+}
+
+
+
+</style>

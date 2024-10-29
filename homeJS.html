@@ -1,0 +1,33 @@
+<script>
+// Script para mostrar la fecha
+document.getElementById('currentDate').innerText = new Date().toLocaleDateString();
+
+// Función para alternar los submenús del menú lateral
+function toggleSubMenu(menuItem) {
+  // Cerrar otros submenús
+  const allSubmenus = document.querySelectorAll('.sidebar__submenu');
+  allSubmenus.forEach(submenu => {
+      submenu.classList.remove('active');  // Quitar clase active
+      submenu.style.display = 'none';      // Ocultar submenú
+  });
+
+  // Quitar la clase active de todos los ítems del menú
+  const allMenuItems = document.querySelectorAll('.sidebar__item');
+  allMenuItems.forEach(item => {
+      item.classList.remove('active');    // Remover clase active de todos
+  });
+
+  // Alternar el submenú del ítem clicado
+  const submenu = menuItem.nextElementSibling;
+  if (submenu.classList.contains('active')) {
+      submenu.style.display = 'none';     // Ocultar submenú si ya está activo
+      menuItem.classList.remove('active');// Remover clase active del ítem
+  } else {
+      submenu.style.display = 'flex';     // Mostrar el submenú
+      menuItem.classList.add('active');   // Agregar clase active al ítem
+  }
+}
+
+</script>
+
+

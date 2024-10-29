@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Proveedores</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <div class="work-area">
+            <h2 class="sub-title">Administra tus Proveedores</h2>
+            <div class="search-container">
+              <input type="text" id="searchBar" placeholder="Buscar proveedor por ID, Nombre o Móvil">
+                <!-- <input type="text" placeholder="Buscar Proveedor..." class="search-input"> -->
+                <button class="add-button" id="addProviderButton">
+                    <i class="fas fa-plus"></i> Añadir
+                </button>
+            </div>
+            <table id="resultTable" style="display:none;">
+        <thead>
+            <th>Acciones</th> <!-- Encabezado para el menú -->
+            <th>ID</th>
+            <th>Empresa</th>
+            <th>Contacto</th>
+            <th>Móvil</th>
+        </thead>
+        <tbody>
+            <!-- Los resultados se agregarán aquí dinámicamente -->
+        </tbody>
+    </table>
+        </div>
+    </div>
+
+    <!-- Panel deslizante para el formulario -->
+    <div id="slidePanel" class="modal">
+        <div class="modal-content">
+            <span id="closePanel" class="close-button">&times;</span>
+            <h2>Añadir Proveedor</h2>
+            <form id="providerForm">
+                <div class="form-group">
+                    <label for="companyName">Nombre de la empresa:</label>
+                    <input type="text" id="companyName" name="companyName">
+                </div>
+
+                <div class="form-group">
+                    <label for="contactName">Nombre del contacto: <span class="required">*</span></label>
+                    <input type="text" id="contactName" name="contactName" required>
+                    <span id="errorContactName" class="error-message"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="mobileNumber">Número de móvil: <span class="required">*</span></label>
+                    <input type="text" id="mobileNumber" name="mobileNumber" required>
+                    <span id="errorMobileNumber" class="error-message"></span>
+                </div>
+
+                <button type="button" id="toggleMoreInfo" class="btn-more-info">Más información</button>
+                <div id="additional-info" class="hidden">
+                    <div class="form-group">
+                        <label for="direccion">Dirección:</label>
+                        <input type="text" id="direccion" placeholder="Dirección">
+                    </div>
+                    <div class="form-group">
+                        <label for="ciudad">Ciudad:</label>
+                        <input type="text" id="ciudad" placeholder="Ciudad">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email:</label>
+                        <input type="email" id="email" placeholder="Email">
+                    </div>
+                    <div class="form-group">
+                        <label for="cuenta-bancaria">Cuenta Bancaria:</label>
+                        <input type="text" id="cuenta-bancaria" placeholder="Cuenta Bancaria">
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+
+                    <!-- <button type="submit" class="btn-save">Guardar</button> -->
+                    <button type="button" class="btn-save" onclick="enviarDatosProveedor()">Guardar</button>
+
+                    <!-- <button type="button" class="btn-save" onclick="google.script.run.guardarProveedor();">Guardar</button> -->
+                    <button type="button" id="cancelBtn" class="btn-close">Cerrar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

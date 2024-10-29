@@ -1,0 +1,68 @@
+<script>
+function enviarDatosProveedor() {
+  // Obtener los valores del formulario HTML
+  const nombreEmpresa = document.getElementById("companyName").value;
+  const nombreContacto = document.getElementById("contactName").value;
+  const numeroMovil = document.getElementById("mobileNumber").value;
+  const direccion = document.getElementById("direccion").value;
+  const ciudad = document.getElementById("ciudad").value;
+  const email = document.getElementById("email").value;
+  const cuentaBancaria = document.getElementById("cuenta-bancaria").value;
+  const fechaCreacion = new Date();
+  const fechaString = fechaCreacion.toISOString().split('T')[0]; // Formato MM-DD-YYYY
+
+
+  // Limpiar mensajes de error previos
+document.getElementById("errorContactName").textContent = "";
+document.getElementById("errorMobileNumber").textContent = "";
+
+  let valid = true; // Variable para controlar la validez del formulario
+
+  // Validar campos obligatorios
+if (!nombreContacto || !numeroMovil) {
+    if (!nombreContacto) {
+        
+   
+mostrarError("contactName", "El nombre del contacto es obligatorio.");
+    }
+    if (!numeroMovil) {
+        mostrarError("mobileNumber", "El número de móvil es obligatorio.");
+    }
+    return; // Detener la ejecución si hay errores
+}
+
+
+// Función para limpiar los mensajes de error
+function limpiarMensajesError() {
+    const errorMessages = document.querySelectorAll(".error-message");
+    errorMessages.forEach((msg) => {
+        msg.textContent = ""; // Limpiar el texto del mensaje
+        msg.
+ 
+remove(); // Eliminar el elemento del DOM
+    });
+}
+
+  // Llamar a la función de Google Apps Script para guardar el proveedor
+  google.script.run.withSuccessHandler(function() {
+    alert("Proveedor guardado exitosamente.");
+    document.getElementById("providerForm").reset(); // Limpiar el formulario
+  }).guardarProveedor(nombreEmpresa, nombreContacto, numeroMovil, direccion, ciudad, email, cuentaBancaria, fechaString);
+}
+
+// Mostrar error en el campo correspondiente
+function mostrarError(campoId, mensaje) {
+  const campo = document.getElementById(campoId);
+  let errorMessage = campo.nextElementSibling;
+
+  // Si ya existe un mensaje de error, actualizarlo; si no, crear uno nuevo
+  if (!errorMessage || !errorMessage.classList.contains("error-message")) {
+    errorMessage = document.createElement("div");
+    errorMessage.className = "error-message";
+    campo.parentNode.insertBefore(errorMessage, campo.nextSibling);
+  }
+
+  errorMessage.textContent = mensaje; // Actualizar el mensaje de error
+}
+
+</script>
