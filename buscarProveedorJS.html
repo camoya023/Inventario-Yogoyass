@@ -59,11 +59,17 @@ function mostrarResultados(resultados) {
     }
 }
 
-// Funciónes para el manejo de las
+// Funciónes para el manejo de las opciones del menu
 function verProveedor(id) {
-    alert("Ver proveedor: " + id);
-    // Agrega la lógica para ver el proveedor
+    // Aquí puedes implementar la lógica para cargar dinámicamente la página de "Ver Proveedor"
+    // Puedes llamar a la función que carga el contenido, como se mencionó antes
+    google.script.run.withSuccessHandler(function(data) {
+        const workArea = document.querySelector('.work-area'); // Asumiendo que tienes una clase work-area para el área de trabajo
+        workArea.innerHTML = data; // Inserta el contenido de Ver Proveedor en el área de trabajo
+    }).obtenerHtmlVerProveedor(id); // Si necesitas pasar el ID al servidor para obtener información específica
 }
+
+
 
 function editarProveedor(id) {
     alert("Editar proveedor: " + id);
@@ -79,9 +85,5 @@ function desactivarProveedor(id) {
     alert("Desactivar proveedor: " + id);
     // Agrega la lógica para desactivar el proveedor
 }
-
-
-
-
 
 </script>

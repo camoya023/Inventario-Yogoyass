@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ver Proveedor</title>
+    <link rel="stylesheet" href="styles.css"> <!-- Enlace al archivo CSS -->
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h2>Ver Proveedor</h2>
+            <label for="providerSelect">Seleccione un proveedor:</label>
+            <select id="providerSelect">
+                <option value="">Seleccione...</option>
+                <option value="1">Proveedor A</option>
+                <option value="2">Proveedor B</option>
+                <option value="3">Proveedor C</option>
+            </select>
+        </div>
+
+        <div class="provider-info">
+            <h3>Información del Proveedor</h3>
+            <p><strong>ID:</strong> 12345</p>
+            <p><strong>Nombre:</strong> Proveedor A</p>
+            <p><strong>Contacto:</strong> Juan Pérez</p>
+            <p><strong>Móvil:</strong> +123456789</p>
+        </div>
+
+        <div class="tabs">
+            <div class="tab-list">
+                <div class="tab-item active" data-tab="compras">Compras</div>
+                <div class="tab-item" data-tab="pagos">Pagos</div>
+                <div class="tab-item" data-tab="informacion">Información Complementaria</div>
+            </div>
+
+            <div class="tab-content active" id="compras">
+                <div class="date-range">
+                    <label for="dateRange">Seleccione rango de fechas:</label>
+                    <select id="dateRange">
+                        <option value="hoy">Hoy</option>
+                        <option value="ayer">Ayer</option>
+                        <option value="ultimos7dias">Últimos 7 días</option>
+                        <option value="esteMes">Este mes</option>
+                        <option value="mesPasado">El mes pasado</option>
+                        <option value="esteAño">Este año</option>
+                        <option value="añoPasado">El año pasado</option>
+                        <option value="rangoPersonalizado">Rango Personalizado</option>
+                    </select>
+                </div>
+                <div id="customDateInputs" style="display: none;">
+                    <input type="date" id="startDate" placeholder="Fecha de inicio">
+                    <input type="date" id="endDate" placeholder="Fecha de fin">
+                </div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Fecha</th>
+                            <th>Monto</th>
+                            <th>Descripción</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>2024-10-01</td>
+                            <td>$1000</td>
+                            <td>Compra de materiales</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="tab-content" id="pagos">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Fecha</th>
+                            <th>Monto</th>
+                            <th>Descripción</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>2024-10-10</td>
+                            <td>$500</td>
+                            <td>Pago realizado</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="tab-content" id="informacion">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Información</th>
+                            <th>Detalles</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Dirección</td>
+                            <td>Calle Falsa 123</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script> <!-- Enlace al archivo JavaScript -->
+</body>
+</html>
